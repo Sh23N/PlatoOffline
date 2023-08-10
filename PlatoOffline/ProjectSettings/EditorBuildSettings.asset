@@ -6,6 +6,18 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/SnakeAndLadder/Scenesl/SnakeLadder.unity
+    path: Assets/menu/menu.unity
+    guid: bca59a4c24bf1e645b91ad4582f14e15
+  - enabled: 1
+    path: Assets/SnakeAndLadder/Scenes/Game1.unity
+    guid: 35c5d1fb5353bd54abe8f891a07ec177
+  - enabled: 1
+    path: Assets/XO/Scenes/Game2.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Ludo/Game3.unity
+    guid: 6a9384a83d85df3499692ec146c98627
+  - enabled: 1
+    path: Assets/Chess/Game4.unity
+    guid: 01a45563510828446a81386c2b2c69cc
   m_configObjects: {}
