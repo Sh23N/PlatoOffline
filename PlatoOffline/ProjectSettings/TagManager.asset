@@ -7,6 +7,11 @@ TagManager:
   - snake
   - ladder
   - WinSq
+  - Reds
+  - Blues
+  - Greens
+  - Yellows
+  - Destination
   layers:
   - Default
   - TransparentFX

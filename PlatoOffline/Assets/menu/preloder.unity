@@ -476,7 +476,7 @@ GameObject:
   - component: {fileID: 1992776114}
   - component: {fileID: 1992776113}
   m_Layer: 0
-  m_Name: control
+  m_Name: controlPlayerHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

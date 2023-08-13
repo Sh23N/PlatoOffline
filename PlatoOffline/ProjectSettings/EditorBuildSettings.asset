@@ -24,6 +24,6 @@ EditorBuildSettings:
     path: Assets/Chess/Game4.unity
     guid: 01a45563510828446a81386c2b2c69cc
   - enabled: 1
-    path: Assets/reached15min.unity
+    path: Assets/reched/reached15min.unity
     guid: 6bb1a534a0f9d7248b9e7febc42803b3
   m_configObjects: {}

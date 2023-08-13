@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class reached : MonoBehaviour
+public class reached : MonoBehaviour //important to health
 {    static public string passedTime;
     float canGameT;
     float t = 0.0f;
