@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -8,9 +9,11 @@ using UnityEngine.UI;
 public class Dice_Ludo : MonoBehaviour
 {
     public Sprite[] DiceArray;
-
+    public Button RollButt;
     //public Button RollButton;
     public Image dice;
+
+    static public bool rollClick;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +22,8 @@ public class Dice_Ludo : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
+    {   
+     
         if (Turn_Ludo.whoTurn == 1)//system player clicked
         {
             //RollButton.gameObject.SetActive(false);
@@ -40,6 +44,7 @@ public class Dice_Ludo : MonoBehaviour
         }
         else if (Turn_Ludo.whoTurn == 3)//this is human and himSelf mus click
         {
+             
            // if (turn.T % 60 <= 4)
                // RollButton.gameObject.SetActive(true);
 
@@ -55,8 +60,8 @@ public class Dice_Ludo : MonoBehaviour
     }
     public void DiceOnClick()
     {
+        
         PlayerI.hitt = false;
-        print("Dicecccc");
         int d = DiceRoll();
         dice.sprite = DiceArray[d-1];
     
@@ -64,7 +69,6 @@ public class Dice_Ludo : MonoBehaviour
         {
             PlayerI.rand1 = d;
             PlayerI.noMoveForIt1 = true;
-            //  print(  Move.noMoveForIt0);
         }
         else if (Turn_Ludo.whoTurn == 2)
         {
@@ -75,6 +79,8 @@ public class Dice_Ludo : MonoBehaviour
         {
             PlayerI.rand3 = d;
             PlayerI.noMoveForIt3 = true;
+            RollButt.gameObject.SetActive(false);
+            rollClick = true;//******
         }
         else if (Turn_Ludo.whoTurn == 4)
         {
@@ -82,6 +88,6 @@ public class Dice_Ludo : MonoBehaviour
             PlayerI.noMoveForIt4 = true;
         }
 
-        Turn_Ludo.turnChange();
+        //Turn_Ludo.turnChange();
     }
 }

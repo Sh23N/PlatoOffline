@@ -47,32 +47,40 @@ public class Turn_Ludo : MonoBehaviour
         switch (whoTurn)
         {
             case 1:
+                PlayerI.noMoveForIt3 = false;
                 Turn1Image.enabled = true;
                 Turn2Image.enabled = false;
                 Turn3Image.enabled = false;
                 Turn4Image.enabled = false;
                 RollButt.gameObject.SetActive(false);
+                Dice_Ludo.rollClick = false;
                 break;
             case 2:
+                PlayerI.noMoveForIt3 = false;
                 Turn1Image.enabled = false;
                 Turn2Image.enabled = true;
                 Turn3Image.enabled = false;
                 Turn4Image.enabled = false;
                 RollButt.gameObject.SetActive(false);
+                Dice_Ludo.rollClick = false;
                 break;
             case 3:
                 Turn1Image.enabled = false;
                 Turn2Image.enabled = false;
                 Turn3Image.enabled = true;
                 Turn4Image.enabled = false;
+              if(Dice_Ludo.rollClick == false)
                 RollButt.gameObject.SetActive(true);
+                
                 break;
             case 4:
+                PlayerI.noMoveForIt3 = false;
                 Turn1Image.enabled = false;
                 Turn2Image.enabled = false;
                 Turn3Image.enabled = false;
                 Turn4Image.enabled = true;
                 RollButt.gameObject.SetActive(false);
+                Dice_Ludo.rollClick = false;
                 break;
         }
     }
@@ -94,6 +102,27 @@ public class Turn_Ludo : MonoBehaviour
                 whoTurn = 1;
                 break;
         }
+        PlayerI.hit = false;
+    }
+    public static void againTurn()//to give prize when get 6 on dice
+    {
+        T = 5.0f;
+       /* switch (whoTurn)
+        {
+            case 1:
+                whoTurn = 1;
+                break;
+            case 2:
+                whoTurn = 2;
+                break;
+            case 3:
+                whoTurn = 3;
+                break;
+            case 4:
+                whoTurn = 4;
+                break;
+        }*/
+
     }
    
 }
