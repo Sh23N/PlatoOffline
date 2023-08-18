@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class preloder : MonoBehaviour
 {
-    float T=1.5f;
+    float T=0.1f;
     float t;
     // Start is called before the first frame update
     void Start()

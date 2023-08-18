@@ -52,16 +52,19 @@ public class Dice : MonoBehaviour
 
         if (turn.whoturn == 0)
         {
-            Move.rand0 = d;
-            Move.noMoveForIt0 = true;
+            Movment.rand0 = d;
+           /* Move.rand0 = d;
+            Move.noMoveForIt0 = true;*/
           //  print(  Move.noMoveForIt0);
         }
         else if (turn.whoturn == 1)
         {
-            Move.rand1 = d;
-            Move.noMoveForIt1 = true;
+            Movment.rand1 = d;
+            /* Move.rand1 = d;
+             Move.noMoveForIt1 = true;*/
         }
-        turn.turnToggle();
+        Movment.moveTo();
+       // turn.turnToggle();//****
     }
 
 

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Runtime.Versioning;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,7 +11,7 @@ public class PlayerI : MonoBehaviour
 {
     public Transform[] wayPoints;
     public Transform[] FirstPositions;// 0-3 -> red ,4-7-> green , 8-11 -> yellow , 12-15-> blue
-    public static int[] curcurrentIndex = new int[16];  // 0-3 -> red ,4-7-> green , 8-11 -> yellow , 12-15-> blue 
+    public static int[] currentIndex = new int[16];  // 0-3 -> red ,4-7-> green , 8-11 -> yellow , 12-15-> blue 
     public static bool[] alive = new bool[16]; // 0-3 -> red ,4-7-> green , 8-11 -> yellow , 12-15-> blue
 
     bool notEmpty;
@@ -51,10 +52,18 @@ public class PlayerI : MonoBehaviour
     public static bool hit;
 
     public Button RollButt;
+    void Awake()
+    {
+       
+    }
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < 16; i++)
+        {
+            alive[i] = false;
+            currentIndex[i] = 0;
+        }
     }
 
     // Update is called once per frame
@@ -79,73 +88,73 @@ public class PlayerI : MonoBehaviour
                 if (a.gameObject.name == "RED1")
                 {
                     print("hitt1");
-                    curcurrentIndex[0] = 0;
+                    currentIndex[0] = 0;
                     a.gameObject.transform.position = FirstPositions[0].position;
                     alive[0] = false;
                 }
                 if (a.gameObject.name == "RED2")
                 {
-                    curcurrentIndex[1] = 0;
+                    currentIndex[1] = 0;
                     a.gameObject.transform.position = FirstPositions[1].position;
                     alive[1] = false;
                 }
                 if (a.gameObject.name == "RED3")
                 {
-                    curcurrentIndex[2] = 0;
+                    currentIndex[2] = 0;
                     a.gameObject.transform.position = FirstPositions[2].position;
                     alive[2] = false;
                 }
                 if (a.gameObject.name == "RED4")
                 {
-                    curcurrentIndex[3] = 0;
+                    currentIndex[3] = 0;
                     a.gameObject.transform.position = FirstPositions[3].position;
                     alive[3] = false;
                 }
                 if (a.gameObject.name == "GREEN1")
                 {
-                    curcurrentIndex[4] = 0;
+                    currentIndex[4] = 0;
                     a.gameObject.transform.position = FirstPositions[4].position;
                     alive[4] = false;
                 }
                 if (a.gameObject.name == "GREEN2")
                 {
-                    curcurrentIndex[5] = 0;
+                    currentIndex[5] = 0;
                     a.gameObject.transform.position = FirstPositions[5].position;
                     alive[5] = false;
                 }
                 if (a.gameObject.name == "GREEN3")
                 {
-                    curcurrentIndex[6] = 0;
+                    currentIndex[6] = 0;
                     a.gameObject.transform.position = FirstPositions[6].position;
                     alive[6] = false;
                 }
                 if (a.gameObject.name == "GREEN4")
                 {
-                    curcurrentIndex[7] = 0;
+                    currentIndex[7] = 0;
                     a.gameObject.transform.position = FirstPositions[7].position;
                     alive[7] = false;
                 }
                 if (a.gameObject.name == "YELLOW1")
                 {
-                    curcurrentIndex[8] = 0;
+                    currentIndex[8] = 0;
                     a.gameObject.transform.position = FirstPositions[8].position;
                     alive[8] = false;
                 }
                 if (a.gameObject.name == "YELLOW2")
                 {
-                    curcurrentIndex[9] = 0;
+                    currentIndex[9] = 0;
                     a.gameObject.transform.position = FirstPositions[9].position;
                     alive[9] = false;
                 }
                 if (a.gameObject.name == "YELLOW3")
                 {
-                    curcurrentIndex[10] = 0;
+                    currentIndex[10] = 0;
                     a.gameObject.transform.position = FirstPositions[10].position;
                     alive[10] = false;
                 }
                 if (a.gameObject.name == "YELLOW4")
                 {
-                    curcurrentIndex[11] = 0;
+                    currentIndex[11] = 0;
                     a.gameObject.transform.position = FirstPositions[11].position;
                     alive[11] = false;
                 }
@@ -153,25 +162,25 @@ public class PlayerI : MonoBehaviour
            
                 if (a.gameObject.name == "BLUE1")
                 {
-                    curcurrentIndex[12] = 0;
+                    currentIndex[12] = 0;
                     a.gameObject.transform.position = FirstPositions[12].position;
                     alive[12] = false;
                 }
                 if (a.gameObject.name == "BLUE2")
                 {
-                    curcurrentIndex[13] = 0;
+                    currentIndex[13] = 0;
                     a.gameObject.transform.position = FirstPositions[13].position;
                     alive[13] = false;
                 }
                 if (a.gameObject.name == "BLUE3")
                 {
-                    curcurrentIndex[14] = 0;
+                    currentIndex[14] = 0;
                     a.gameObject.transform.position = FirstPositions[14].position;
                     alive[14] = false;
                 }
                 if (a.gameObject.name == "BLUE4")
                 {
-                    curcurrentIndex[15] = 0;
+                    currentIndex[15] = 0;
                     a.gameObject.transform.position = FirstPositions[15].position;
                     alive[15] = false;
                 }
@@ -194,17 +203,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Red1"))
                         {
-                            lastIndex = curcurrentIndex[0];
-                            curcurrentIndex[0] += rand1;
-                            transform.position = wayPoints[curcurrentIndex[0]].position;
+                            lastIndex = currentIndex[0];
+                            currentIndex[0] += rand1;
+                            transform.position = wayPoints[currentIndex[0]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand1 == 6)
                     {
                         alive[0] = true;
-                        lastIndex = curcurrentIndex[0];
-                        transform.position = wayPoints[curcurrentIndex[0]].position;
+                        lastIndex = currentIndex[0];
+                        transform.position = wayPoints[currentIndex[0]].position;
                         Turn_Ludo.againTurn();//prize
 
                     }
@@ -218,17 +227,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Red2"))
                         {
-                            lastIndex = curcurrentIndex[1];
-                            curcurrentIndex[1] += rand1;
-                            transform.position = wayPoints[curcurrentIndex[1]].position;
+                            lastIndex = currentIndex[1];
+                            currentIndex[1] += rand1;
+                            transform.position = wayPoints[currentIndex[1]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand1 == 6)
                     {
                         alive[1] = true;
-                        lastIndex = curcurrentIndex[1];
-                        transform.position = wayPoints[curcurrentIndex[1]].position;
+                        lastIndex = currentIndex[1];
+                        transform.position = wayPoints[currentIndex[1]].position;
                         Turn_Ludo.againTurn();//prize
 
                     }
@@ -241,17 +250,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Red3"))
                         {
-                            lastIndex = curcurrentIndex[2];
-                            curcurrentIndex[2] += rand1;
-                            transform.position = wayPoints[curcurrentIndex[2]].position;
+                            lastIndex = currentIndex[2];
+                            currentIndex[2] += rand1;
+                            transform.position = wayPoints[currentIndex[2]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand1 == 6)
                     {
                         alive[2] = true;
-                        lastIndex = curcurrentIndex[2];
-                        transform.position = wayPoints[curcurrentIndex[2]].position;
+                        lastIndex = currentIndex[2];
+                        transform.position = wayPoints[currentIndex[2]].position;
                         Turn_Ludo.againTurn();//prize
 
                     }
@@ -265,17 +274,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Red4"))
                         {
-                            lastIndex = curcurrentIndex[3];
-                            curcurrentIndex[3] += rand1;
-                            transform.position = wayPoints[curcurrentIndex[3]].position;
+                            lastIndex = currentIndex[3];
+                            currentIndex[3] += rand1;
+                            transform.position = wayPoints[currentIndex[3]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand1 == 6)
                     {
                         alive[3] = true;
-                        lastIndex = curcurrentIndex[3];
-                        transform.position = wayPoints[curcurrentIndex[3]].position;
+                        lastIndex = currentIndex[3];
+                        transform.position = wayPoints[currentIndex[3]].position;
                         Turn_Ludo.againTurn();//prize
 
                     }
@@ -297,17 +306,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Green1"))
                         {
-                            lastIndex = curcurrentIndex[4];
-                            curcurrentIndex[4] += rand2;
-                            transform.position = wayPoints[curcurrentIndex[4]].position;
+                            lastIndex = currentIndex[4];
+                            currentIndex[4] += rand2;
+                            transform.position = wayPoints[currentIndex[4]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand2 == 6)
                     {
                         alive[4] = true;
-                        lastIndex = curcurrentIndex[4];
-                        transform.position = wayPoints[curcurrentIndex[4]].position;
+                        lastIndex = currentIndex[4];
+                        transform.position = wayPoints[currentIndex[4]].position;
                         Turn_Ludo.againTurn();//prize
 
                     }
@@ -321,9 +330,9 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Green2"))
                         {
-                            lastIndex = curcurrentIndex[5];
-                            curcurrentIndex[5] += rand2;
-                            transform.position = wayPoints[curcurrentIndex[5]].position;
+                            lastIndex = currentIndex[5];
+                            currentIndex[5] += rand2;
+                            transform.position = wayPoints[currentIndex[5]].position;
                             Turn_Ludo.turnChange();
                         }
 
@@ -331,8 +340,8 @@ public class PlayerI : MonoBehaviour
                     else if (rand2 == 6)
                     {
                         alive[5] = true;
-                        lastIndex = curcurrentIndex[5];
-                        transform.position = wayPoints[curcurrentIndex[5]].position;
+                        lastIndex = currentIndex[5];
+                        transform.position = wayPoints[currentIndex[5]].position;
                         Turn_Ludo.againTurn();//prize
 
                     }
@@ -345,17 +354,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Green3"))
                         {
-                            lastIndex = curcurrentIndex[6];
-                            curcurrentIndex[6] += rand2;
-                            transform.position = wayPoints[curcurrentIndex[6]].position;
+                            lastIndex = currentIndex[6];
+                            currentIndex[6] += rand2;
+                            transform.position = wayPoints[currentIndex[6]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand2 == 6)
                     {
                         alive[6] = true;
-                        lastIndex = curcurrentIndex[6];
-                        transform.position = wayPoints[curcurrentIndex[6]].position;
+                        lastIndex = currentIndex[6];
+                        transform.position = wayPoints[currentIndex[6]].position;
                         Turn_Ludo.againTurn();//prize
 
                     }
@@ -368,17 +377,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Green4"))
                         {
-                            lastIndex = curcurrentIndex[7];
-                            curcurrentIndex[7] += rand2;
-                            transform.position = wayPoints[curcurrentIndex[7]].position;
+                            lastIndex = currentIndex[7];
+                            currentIndex[7] += rand2;
+                            transform.position = wayPoints[currentIndex[7]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand2 == 6)
                     {
                         alive[7] = true;
-                        lastIndex = curcurrentIndex[7];
-                        transform.position = wayPoints[curcurrentIndex[7]].position;
+                        lastIndex = currentIndex[7];
+                        transform.position = wayPoints[currentIndex[7]].position;
                         Turn_Ludo.againTurn();//prize
 
                     }
@@ -401,17 +410,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Yellow1"))
                         {
-                            lastIndex = curcurrentIndex[8];
-                            curcurrentIndex[8] += rand3;
-                            transform.position = wayPoints[curcurrentIndex[8]].position;
+                            lastIndex = currentIndex[8];
+                            currentIndex[8] += rand3;
+                            transform.position = wayPoints[currentIndex[8]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand3 == 6)
                     {
                         alive[8] = true;
-                        lastIndex = curcurrentIndex[8];
-                        transform.position = wayPoints[curcurrentIndex[8]].position;
+                        lastIndex = currentIndex[8];
+                        transform.position = wayPoints[currentIndex[8]].position;
                         Turn_Ludo.againTurn();//prize
                         RollButt.gameObject.SetActive(true);
 
@@ -425,17 +434,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Yellow2"))
                         {
-                            lastIndex = curcurrentIndex[9];
-                            curcurrentIndex[9] += rand3;
-                            transform.position = wayPoints[curcurrentIndex[9]].position;
+                            lastIndex = currentIndex[9];
+                            currentIndex[9] += rand3;
+                            transform.position = wayPoints[currentIndex[9]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand3 == 6)
                     {
                         alive[9] = true;
-                        lastIndex = curcurrentIndex[9];
-                        transform.position = wayPoints[curcurrentIndex[9]].position;
+                        lastIndex = currentIndex[9];
+                        transform.position = wayPoints[currentIndex[9]].position;
                         Turn_Ludo.againTurn();//prize
                         RollButt.gameObject.SetActive(true);
 
@@ -449,17 +458,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Yellow3"))
                         {
-                            lastIndex = curcurrentIndex[10];
-                            curcurrentIndex[10] += rand3;
-                            transform.position = wayPoints[curcurrentIndex[10]].position;
+                            lastIndex = currentIndex[10];
+                            currentIndex[10] += rand3;
+                            transform.position = wayPoints[currentIndex[10]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand3 == 6)
                     {
                         alive[10] = true;
-                        lastIndex = curcurrentIndex[10];
-                        transform.position = wayPoints[curcurrentIndex[10]].position;
+                        lastIndex = currentIndex[10];
+                        transform.position = wayPoints[currentIndex[10]].position;
                         Turn_Ludo.againTurn();//prize
                         RollButt.gameObject.SetActive(true);
 
@@ -474,17 +483,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Yellow4"))
                         {
-                            lastIndex = curcurrentIndex[11];
-                            curcurrentIndex[11] += rand3;
-                            transform.position = wayPoints[curcurrentIndex[11]].position;
+                            lastIndex = currentIndex[11];
+                            currentIndex[11] += rand3;
+                            transform.position = wayPoints[currentIndex[11]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand3 == 6)
                     {
                         alive[11] = true;
-                        lastIndex = curcurrentIndex[11];
-                        transform.position = wayPoints[curcurrentIndex[11]].position;
+                        lastIndex = currentIndex[11];
+                        transform.position = wayPoints[currentIndex[11]].position;
                         Turn_Ludo.againTurn();//prize
                         RollButt.gameObject.SetActive(true);
 
@@ -507,17 +516,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Blue1"))
                         {
-                            lastIndex = curcurrentIndex[12];
-                            curcurrentIndex[12] += rand4;
-                            transform.position = wayPoints[curcurrentIndex[12]].position;
+                            lastIndex = currentIndex[12];
+                            currentIndex[12] += rand4;
+                            transform.position = wayPoints[currentIndex[12]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand4 == 6)
                     {
                         alive[12] = true;
-                        lastIndex = curcurrentIndex[12];
-                        transform.position = wayPoints[curcurrentIndex[12]].position;
+                        lastIndex = currentIndex[12];
+                        transform.position = wayPoints[currentIndex[12]].position;
                         Turn_Ludo.againTurn();//prize
 
                     }
@@ -530,17 +539,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Blue2"))
                         {
-                            lastIndex = curcurrentIndex[13];
-                            curcurrentIndex[13] += rand4;
-                            transform.position = wayPoints[curcurrentIndex[13]].position;
+                            lastIndex = currentIndex[13];
+                            currentIndex[13] += rand4;
+                            transform.position = wayPoints[currentIndex[13]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand4 == 6)
                     {
                         alive[13] = true;
-                        lastIndex = curcurrentIndex[13];
-                        transform.position = wayPoints[curcurrentIndex[13]].position;
+                        lastIndex = currentIndex[13];
+                        transform.position = wayPoints[currentIndex[13]].position;
                         Turn_Ludo.againTurn();//prize
                     }
                     Hit();
@@ -552,17 +561,17 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Blue3"))
                         {
-                            lastIndex = curcurrentIndex[14];
-                            curcurrentIndex[14] += rand4;
-                            transform.position = wayPoints[curcurrentIndex[14]].position;
+                            lastIndex = currentIndex[14];
+                            currentIndex[14] += rand4;
+                            transform.position = wayPoints[currentIndex[14]].position;
                             Turn_Ludo.turnChange();
                         }
                     }
                     else if (rand4 == 6)
                     {
                         alive[14] = true;
-                        lastIndex = curcurrentIndex[14];
-                        transform.position = wayPoints[curcurrentIndex[14]].position;
+                        lastIndex = currentIndex[14];
+                        transform.position = wayPoints[currentIndex[14]].position;
                         Turn_Ludo.againTurn();//prize
                     }
                     Hit();
@@ -574,9 +583,9 @@ public class PlayerI : MonoBehaviour
                     {
                         if (CanGo("Blue4"))
                         {
-                            lastIndex = curcurrentIndex[15];
-                            curcurrentIndex[15] += rand4;
-                            transform.position = wayPoints[curcurrentIndex[15]].position;
+                            lastIndex = currentIndex[15];
+                            currentIndex[15] += rand4;
+                            transform.position = wayPoints[currentIndex[15]].position;
                             Turn_Ludo.turnChange();
                         }
 
@@ -584,8 +593,8 @@ public class PlayerI : MonoBehaviour
                     else if (rand4 == 6)
                     {
                         alive[15] = true;
-                        lastIndex = curcurrentIndex[15];
-                        transform.position = wayPoints[curcurrentIndex[15]].position;
+                        lastIndex = currentIndex[15];
+                        transform.position = wayPoints[currentIndex[15]].position;
                         Turn_Ludo.againTurn();//prize
 
                     }
@@ -622,9 +631,9 @@ public class PlayerI : MonoBehaviour
             case "RedPlayers":
                 for (int i = 0; i <= 3; i++)
                 {
-                    if (curcurrentIndex[i]<52 && curcurrentIndex[i] >= maxVal)
+                    if (currentIndex[i]<52 && currentIndex[i] >= maxVal)
                     {
-                        maxVal = curcurrentIndex[i];
+                        maxVal = currentIndex[i];
                         maxIndex = i % 4;
                     }
                 }
@@ -633,9 +642,9 @@ public class PlayerI : MonoBehaviour
             case "GreenPlayers":
                 for (int i = 4; i <= 7; i++)
                 {
-                    if (curcurrentIndex[i] < 52 && curcurrentIndex[i] >= maxVal)
+                    if (currentIndex[i] < 52 && currentIndex[i] >= maxVal)
                     {
-                        maxVal = curcurrentIndex[i];
+                        maxVal = currentIndex[i];
                         maxIndex = i % 4;
                     }
                 }
@@ -645,9 +654,9 @@ public class PlayerI : MonoBehaviour
             case "BluePlayers":
                 for (int i = 12; i <= 15; i++)
                 {
-                    if (curcurrentIndex[i] < 52 && curcurrentIndex[i] >= maxVal)
+                    if (currentIndex[i] < 52 && currentIndex[i] >= maxVal)
                     {
-                        maxVal = curcurrentIndex[i];
+                        maxVal = currentIndex[i];
                         maxIndex = i % 4;
                     }
                 }
@@ -662,97 +671,97 @@ public class PlayerI : MonoBehaviour
         switch (gameObjectName)
         {
             case "Red1":
-                if (curcurrentIndex[0] + rand1 != curcurrentIndex[1] && curcurrentIndex[0] + rand1 != curcurrentIndex[2] && curcurrentIndex[0] + rand1 != curcurrentIndex[3])
+                if (currentIndex[0] + rand1 != currentIndex[1] && currentIndex[0] + rand1 != currentIndex[2] && currentIndex[0] + rand1 != currentIndex[3])
                     return true;
                 else
                     return false;
                 break;
             case "Red2":
-                if (curcurrentIndex[1] + rand1 != curcurrentIndex[0] && curcurrentIndex[1] + rand1 != curcurrentIndex[2] && curcurrentIndex[1] + rand1 != curcurrentIndex[3])
+                if (currentIndex[1] + rand1 != currentIndex[0] && currentIndex[1] + rand1 != currentIndex[2] && currentIndex[1] + rand1 != currentIndex[3])
                     return true;
                 else
                     return false;
                 break;
             case "Red3":
-                if (curcurrentIndex[2] + rand1 != curcurrentIndex[0] && curcurrentIndex[2] + rand1 != curcurrentIndex[3] && curcurrentIndex[2] + rand1 != curcurrentIndex[1])
+                if (currentIndex[2] + rand1 != currentIndex[0] && currentIndex[2] + rand1 != currentIndex[3] && currentIndex[2] + rand1 != currentIndex[1])
                     return true;
                 else
                     return false;
                 break;
             case "Red4":
-                if (curcurrentIndex[3] + rand1 != curcurrentIndex[0] && curcurrentIndex[3] + rand1 != curcurrentIndex[2] && curcurrentIndex[3] + rand1 != curcurrentIndex[1])
+                if (currentIndex[3] + rand1 != currentIndex[0] && currentIndex[3] + rand1 != currentIndex[2] && currentIndex[3] + rand1 != currentIndex[1])
                     return true;
                 else
                     return false;
                 break;
             case "Green1":
-                if (curcurrentIndex[4] + rand2 != curcurrentIndex[5] && curcurrentIndex[4] + rand2 != curcurrentIndex[6] && curcurrentIndex[4] + rand2 != curcurrentIndex[7])
+                if (currentIndex[4] + rand2 != currentIndex[5] && currentIndex[4] + rand2 != currentIndex[6] && currentIndex[4] + rand2 != currentIndex[7])
                     return true;
                 else
                     return false;
                 break;
             case "Green2":
-                if (curcurrentIndex[5] + rand2 != curcurrentIndex[4] && curcurrentIndex[5] + rand2 != curcurrentIndex[6] && curcurrentIndex[5] + rand2 != curcurrentIndex[7])
+                if (currentIndex[5] + rand2 != currentIndex[4] && currentIndex[5] + rand2 != currentIndex[6] && currentIndex[5] + rand2 != currentIndex[7])
                     return true;
                 else
                     return false;
                 break;
             case "Green3":
-                if (curcurrentIndex[6] + rand2 != curcurrentIndex[4] && curcurrentIndex[6] + rand2 != curcurrentIndex[5] && curcurrentIndex[6] + rand2 != curcurrentIndex[7])
+                if (currentIndex[6] + rand2 != currentIndex[4] && currentIndex[6] + rand2 != currentIndex[5] && currentIndex[6] + rand2 != currentIndex[7])
                     return true;
                 else
                     return false;
                 break;
             case "Green4":
-                if (curcurrentIndex[7] + rand2 != curcurrentIndex[5] && curcurrentIndex[7] + rand2 != curcurrentIndex[6] && curcurrentIndex[7] + rand2 != curcurrentIndex[4])
+                if (currentIndex[7] + rand2 != currentIndex[5] && currentIndex[7] + rand2 != currentIndex[6] && currentIndex[7] + rand2 != currentIndex[4])
                     return true;
                 else
                     return false;
                 break;
             case "Yellow1":
-                if (curcurrentIndex[8] + rand3 != curcurrentIndex[9] && curcurrentIndex[8] + rand3 != curcurrentIndex[10] && curcurrentIndex[8] + rand3 != curcurrentIndex[11])
+                if (currentIndex[8] + rand3 != currentIndex[9] && currentIndex[8] + rand3 != currentIndex[10] && currentIndex[8] + rand3 != currentIndex[11])
                     return true;
                 else
                     return false;
                 break;
             case "Yellow2":
-                if (curcurrentIndex[9] + rand3 != curcurrentIndex[8] && curcurrentIndex[9] + rand3 != curcurrentIndex[10] && curcurrentIndex[9] + rand3 != curcurrentIndex[11])
+                if (currentIndex[9] + rand3 != currentIndex[8] && currentIndex[9] + rand3 != currentIndex[10] && currentIndex[9] + rand3 != currentIndex[11])
                     return true;
                 else
                     return false;
                 break;
             case "Yellow3":
-                if (curcurrentIndex[10] + rand3 != curcurrentIndex[8] && curcurrentIndex[10] + rand3 != curcurrentIndex[9] && curcurrentIndex[10] + rand3 != curcurrentIndex[11])
+                if (currentIndex[10] + rand3 != currentIndex[8] && currentIndex[10] + rand3 != currentIndex[9] && currentIndex[10] + rand3 != currentIndex[11])
                     return true;
                 else
                     return false;
                 break;
             case "Yellow4":
-                if (curcurrentIndex[11] + rand3 != curcurrentIndex[8] && curcurrentIndex[11] + rand3 != curcurrentIndex[9] && curcurrentIndex[11] + rand3 != curcurrentIndex[10])
+                if (currentIndex[11] + rand3 != currentIndex[8] && currentIndex[11] + rand3 != currentIndex[9] && currentIndex[11] + rand3 != currentIndex[10])
                     return true;
                 else
                     return false;
                 break;
             case "Blue1":
-                if (curcurrentIndex[12] + rand4 != curcurrentIndex[13] && curcurrentIndex[12] + rand4 != curcurrentIndex[14] && curcurrentIndex[12] + rand4 != curcurrentIndex[15])
+                if (currentIndex[12] + rand4 != currentIndex[13] && currentIndex[12] + rand4 != currentIndex[14] && currentIndex[12] + rand4 != currentIndex[15])
                     return true;
                 else
                     return false;
                 break;
             case "Blue2":
-                if (curcurrentIndex[13] + rand4 != curcurrentIndex[14] && curcurrentIndex[13] + rand4 != curcurrentIndex[15] && curcurrentIndex[13] + rand4 != curcurrentIndex[12])
+                if (currentIndex[13] + rand4 != currentIndex[14] && currentIndex[13] + rand4 != currentIndex[15] && currentIndex[13] + rand4 != currentIndex[12])
                     return true;
                 else
                     return false;
                 break;
             case "Blue3":
-                if (curcurrentIndex[14] + rand4 != curcurrentIndex[12] && curcurrentIndex[14] + rand4 != curcurrentIndex[13] && curcurrentIndex[14] + rand4 != curcurrentIndex[15])
+                if (currentIndex[14] + rand4 != currentIndex[12] && currentIndex[14] + rand4 != currentIndex[13] && currentIndex[14] + rand4 != currentIndex[15])
                     return true;
                 else
                     return false;
                 break;
             case "Blue4":
-                if (curcurrentIndex[15] + rand4 != curcurrentIndex[12] && curcurrentIndex[15] + rand4 != curcurrentIndex[13] && curcurrentIndex[15] + rand4 != curcurrentIndex[14])
+                if (currentIndex[15] + rand4 != currentIndex[12] && currentIndex[15] + rand4 != currentIndex[13] && currentIndex[15] + rand4 != currentIndex[14])
                     return true;
                 else
                     return false;
@@ -762,56 +771,44 @@ public class PlayerI : MonoBehaviour
     }
     void WhoWinn()
     { 
-         if (curcurrentIndex[0] >= 52 
-            && curcurrentIndex[1] >= 52 
-            && curcurrentIndex[2] >= 52 
-            && curcurrentIndex[3] >= 52 )
+         if (currentIndex[0] >= 52 
+            && currentIndex[1] >= 52 
+            && currentIndex[2] >= 52 
+            && currentIndex[3] >= 52 )
          {
                 //redWin = true;
                 winR.enabled = true;
          }
-        if (curcurrentIndex[4] >= 52 
-            && curcurrentIndex[5] >= 52
-            && curcurrentIndex[6] >= 52
-            && curcurrentIndex[7] >= 52 )
+        if (currentIndex[4] >= 52 
+            && currentIndex[5] >= 52
+            && currentIndex[6] >= 52
+            && currentIndex[7] >= 52 )
         {
            // redWin = true;
             winG.enabled = true;
         }
-        if (curcurrentIndex[8] >= 52 
-            && curcurrentIndex[9] >= 52
-            && curcurrentIndex[10] >= 52 
-            && curcurrentIndex[11] >= 52 )
+        if (currentIndex[8] >= 52 
+            && currentIndex[9] >= 52
+            && currentIndex[10] >= 52 
+            && currentIndex[11] >= 52 )
         {
            // redWin = true;
             winY.enabled = true;
         }
-        if (curcurrentIndex[12] >= 52 
-            && curcurrentIndex[13] >= 52 
-            && curcurrentIndex[14] >= 52  
-            && curcurrentIndex[15] >= 52)
+        if (currentIndex[12] >= 52 
+            && currentIndex[13] >= 52 
+            && currentIndex[14] >= 52  
+            && currentIndex[15] >= 52)
         {
             //redWin = true;
             winB.enabled = true;
         }
 
     }
-    /*bool IsMyTurn()
-    {
-        if(gameObject.tag=="Reds" && Turn_Ludo.whoTurn==1)
-            return true;
-        else if (gameObject.tag == "Greens" && Turn_Ludo.whoTurn == 2)
-            return true;
-        else if (gameObject.tag == "Yellows" && Turn_Ludo.whoTurn == 3)
-            return true;
-        else if (gameObject.tag == "Blues" && Turn_Ludo.whoTurn == 3)
-            return true;
-        else
-            return false;
-    }*/
+    
     void Hit()
     {
-        print("llllll");
+        
         if (gameObject.tag == "Reds")
         {
             for(int i = 0; i <= 3; i++)
@@ -820,21 +817,21 @@ public class PlayerI : MonoBehaviour
                 if (Vector2.Distance(gameObject.transform.position, GreenPlayers[i].transform.position) < 10f)
                 {
                    
-                    curcurrentIndex[i+4] = 0;
+                    currentIndex[i+4] = 0;
                     GreenPlayers[i].transform.position = FirstPositions[i+4].position;
                     alive[i+4] = false;
                 }
                 else if (Vector2.Distance(gameObject.transform.position, YellowPlayers[i].transform.position) < 10f)
                 {
                    
-                    curcurrentIndex[i+8] = 0;
+                    currentIndex[i+8] = 0;
                     YellowPlayers[i].transform.position = FirstPositions[i+8].position;
                     alive[i+8] = false;
                 }
                 else if (Vector2.Distance(gameObject.transform.position, BluePlayers[i].transform.position) < 10f)
                 {
                     
-                    curcurrentIndex[i+12] = 0;
+                    currentIndex[i+12] = 0;
                     BluePlayers[i].transform.position = FirstPositions[i+12].position;
                     alive[i+12] = false;
                 }
@@ -848,20 +845,20 @@ public class PlayerI : MonoBehaviour
                 if (Vector2.Distance(gameObject.transform.position, RedPlayers[i].transform.position) < 10f)
                 {
                    
-                    curcurrentIndex[i] = 0;
+                    currentIndex[i] = 0;
                     RedPlayers[i].transform.position = FirstPositions[i].position;
                     alive[i] = false;
                 }
                 else if (Vector2.Distance(gameObject.transform.position, YellowPlayers[i].transform.position) < 10f)
                 {
 
-                    curcurrentIndex[i + 8] = 0;
+                    currentIndex[i + 8] = 0;
                     YellowPlayers[i].transform.position = FirstPositions[i + 8].position;
                     alive[i + 8] = false;
                 }
                 else if (Vector2.Distance(gameObject.transform.position, BluePlayers[i].transform.position) < 10f)
                 {
-                    curcurrentIndex[i + 12] = 0;
+                    currentIndex[i + 12] = 0;
                     BluePlayers[i].transform.position = FirstPositions[i + 12].position;
                     alive[i + 12] = false;
                 }
@@ -873,19 +870,19 @@ public class PlayerI : MonoBehaviour
             {
                 if (Vector2.Distance(gameObject.transform.position, GreenPlayers[i].transform.position) < 10f)
                 {
-                    curcurrentIndex[i + 4] = 0;
+                    currentIndex[i + 4] = 0;
                     GreenPlayers[i].transform.position = FirstPositions[i + 4].position;
                     alive[i + 4] = false;
                 }
                 else if (Vector2.Distance(gameObject.transform.position, RedPlayers[i].transform.position) < 10f)
                 {
-                    curcurrentIndex[i] = 0;
+                    currentIndex[i] = 0;
                     RedPlayers[i].transform.position = FirstPositions[i].position;
                     alive[i] = false;
                 }
                 else if (Vector2.Distance(gameObject.transform.position, BluePlayers[i].transform.position) < 10f)
                 {
-                    curcurrentIndex[i + 12] = 0;
+                    currentIndex[i + 12] = 0;
                     BluePlayers[i].transform.position = FirstPositions[i + 12].position;
                     alive[i + 12] = false;
                 }
@@ -897,19 +894,19 @@ public class PlayerI : MonoBehaviour
             {
                 if (Vector2.Distance(gameObject.transform.position, GreenPlayers[i].transform.position) < 10f)
                 {
-                    curcurrentIndex[i + 4] = 0;
+                    currentIndex[i + 4] = 0;
                     GreenPlayers[i].transform.position = FirstPositions[i + 4].position;
                     alive[i + 4] = false;
                 }
                 else if (Vector2.Distance(gameObject.transform.position, RedPlayers[i].transform.position) < 10f)
                 {
-                    curcurrentIndex[i] = 0;
+                    currentIndex[i] = 0;
                     RedPlayers[i].transform.position = FirstPositions[i].position;
                     alive[i] = false;
                 }
                 else if (Vector2.Distance(gameObject.transform.position, YellowPlayers[i].transform.position) <10f)
                 {
-                    curcurrentIndex[i + 8] = 0;
+                    currentIndex[i + 8] = 0;
                     YellowPlayers[i].transform.position = FirstPositions[i + 8].position;
                     alive[i + 8] = false;
                 }

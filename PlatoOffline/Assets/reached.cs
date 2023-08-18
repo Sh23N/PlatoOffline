@@ -17,7 +17,7 @@ public class reached : MonoBehaviour //important to health
     }
     void Start()
     {
-        canGameT = 30.0f;//15 min
+        canGameT = 900.0f;//15 min
     }
     // Update is called once per frame
     void Update()
