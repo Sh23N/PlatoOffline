@@ -18,9 +18,11 @@ public class Load : MonoBehaviour
     public void retry()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        print("retry");
     }
     public void menu()
     {
         SceneManager.LoadScene(1);
+        print("menu");
     }
 }

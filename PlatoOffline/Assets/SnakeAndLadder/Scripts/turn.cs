@@ -24,8 +24,8 @@ public class turn : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!Move.hasWiner)
-        {
+       // if (!Move.hasWiner)
+      //  {
             T -= Time.deltaTime;
             t = T % 60;//convert to seccond
                 if (t <= 0)
@@ -35,7 +35,7 @@ public class turn : MonoBehaviour
                 }
                 timer.text = Math.Round(t).ToString();
             
-        }
+       // }
     }    
  
 

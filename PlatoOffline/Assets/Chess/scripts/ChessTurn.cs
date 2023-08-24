@@ -8,7 +8,7 @@ using System;
 public class ChessTurn : MonoBehaviour
 {
 
-    public static float T = 5.0f;// this is period of every turn
+    public static float T = 30.0f;// this is period of every turn
     private float t = 0.0f;//this is time
     public static int whoturn;
     public TMP_Text timer;
@@ -36,7 +36,7 @@ public class ChessTurn : MonoBehaviour
     }
     public static void turnToggle()
     {
-        T = 5.0f;
+        T = 30.0f;
         if (whoturn == 0)
             whoturn = 1;
         else

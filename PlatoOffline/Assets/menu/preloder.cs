@@ -13,7 +13,7 @@ public class preloder : MonoBehaviour
         if (PlayerPrefs.HasKey("timeStamp"))
         {
             float now = PlayerPrefs.GetFloat("timeStamp");
-            if ((float)(DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds - now<0.1f)//!!!!change 10
+            if ((float)(DateTime.Now - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds - now<0.5f)//!!!!change 10
                 SceneManager.LoadScene(6);//loade reached 15 min scene
         }
     }
